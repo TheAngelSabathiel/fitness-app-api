@@ -28,7 +28,7 @@ module.exports.registerUser = (req, res) => {
 			return null
 		}
 
-		const user = new User({
+		const user = new User({	
 			email : req.body.email,
 			password : pass,
 			firstName : req.body.firstName,
@@ -41,8 +41,7 @@ module.exports.registerUser = (req, res) => {
 		if (!registeredUser) return;
 
 		return res.status(201).send({
-				message : "Registered Successfully",
-				user : registeredUser
+				message : "Registered Successfully"
 			});
 	})
 	.catch(error => errorHandler(error, req, res));
@@ -84,4 +83,20 @@ module.exports.loginUser = (req, res) => {
     })
     .catch(error => errorHandler(error, req, res));
 
+}
+
+module.exports.getUserDetails = (req, res) => {
+	User.findById(req.user.id).select("-password")
+	.then(user => {
+		if (!user) {
+			return res.status(404).send({
+				message : "No user found"
+			})
+		}
+
+		return res.status(200).send({
+			user : user
+		});
+	})
+	.catch(error => errorHandler(error, req, res));
 }

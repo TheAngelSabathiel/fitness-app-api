@@ -10,7 +10,7 @@ const workoutSchema = new mongoose.Schema({
 		required : [true, "Workout Name is required"]
 	},
 	duration : {
-		type : Number,
+		type : String,
 		required : [true, "Workout duration is required"]
 	},
 	dateAdded : {
@@ -19,8 +19,8 @@ const workoutSchema = new mongoose.Schema({
 	},
 	status :{
 		type : String,
-		enum : ["Pending", "In Progress", "Completed"],
-		default : "In Progress"
+		enum : ["pending", "in progress", "completed"],
+		default : "pending"
 	}
 });
 

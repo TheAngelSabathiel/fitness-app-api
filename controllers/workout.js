@@ -10,11 +10,7 @@ module.exports.addWorkout = (req, res) => {
 
 	workout.save()
 	.then(savedWorkout => {
-		return res.status(201).send({
-			success : true,
-			message : "Workout added successfully",
-			workout : savedWorkout
-		});
+		return res.status(201).send(savedWorkout);
 	})
 	.catch(error => errorHandler(error, req, res));
 }
@@ -30,7 +26,7 @@ module.exports.getMyWorkouts = (req, res) => {
 			});
 		}
 
-		return res.status(200).send(workouts);
+		return res.status(200).send({workouts});
 	})
 	.catch(error => errorHandler(error, req, res));
 }
@@ -46,9 +42,8 @@ module.exports.updateWorkout = (req, res) => {
 		}
 
 		return res.status(200).send({
-			success : true,
 			message : "Workout updated successfully",
-			workout : workout
+			updatedWorkout : workout
 		});
 	})
 	.catch(error => errorHandler(error, req, res));
@@ -65,7 +60,6 @@ module.exports.deleteWorkout = (req, res) => {
 		}
 
 		return res.status(200).send({
-			success : true,
 			message : "Workout deleted successfully"
 		});
 	})
@@ -92,9 +86,8 @@ module.exports.completeWorkout = (req, res) => {
 		workout.status = "Completed";
 
 		return res.status(200).send({
-			success : true,
-			message : "Workout completed successfully",
-			workout : workout
+			message : "Workout status updated successfully",
+			updatedWorkout : workout
 		});
 	})
 	.catch(error => errorHandler(error, req, res));

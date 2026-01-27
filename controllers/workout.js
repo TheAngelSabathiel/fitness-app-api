@@ -68,7 +68,7 @@ module.exports.deleteWorkout = (req, res) => {
 
 module.exports.completeWorkout = (req, res) => {
 
-	Workout.findByIdAndUpdate( req.params.workoutId , { status : "Completed" })
+	Workout.findByIdAndUpdate( req.params.workoutId , { status : "completed" })
 	.then(workout =>{
 		if (!workout) {
 			return res.status(404).send({

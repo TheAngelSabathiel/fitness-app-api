@@ -83,7 +83,7 @@ module.exports.completeWorkout = (req, res) => {
 			});
 		}
 
-		workout.status = "Completed";
+		workout.status = "completed";
 
 		return res.status(200).send({
 			message : "Workout status updated successfully",
